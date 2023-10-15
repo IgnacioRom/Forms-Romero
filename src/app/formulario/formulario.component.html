@@ -1,0 +1,38 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <!-- NOMBRE -->
+  <div class="mb-3">
+    <label for="nombreUsuario" class="form-label">Nombre</label>
+    <input formControlName="nombre" type="text" class="form-control" id="nombreUsuario">
+  </div>
+  <!-- APELLIDO -->
+  <div class="mb-3">
+    <label for="apellidoUsuario" class="form-label">Apellido</label>
+    <input formControlName="apellido" type="text" class="form-control" id="apellidoUsuario">
+  </div>
+  <!-- EMAIL -->
+  <div class="mb-3">
+    <label for="emailUsuario" class="form-label">Correo Electrónico</label>
+    <input
+    formControlName="email"
+    type="email"
+    class="form-control"
+    [ngClass]="{'is-invalid': emailControlIsInvalid}"
+    id="emailUsuario"
+    >
+    <div class="invalid-feedback">
+      <ng-container *ngIf="emailControl.errors?.['required']">
+        Este campo es requerido
+      </ng-container>
+      <ng-container *ngIf="emailControl.errors?.['email']">
+        El valor ingresado no es un email válido
+      </ng-container>
+    </div>
+  </div>
+    <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico <br> con nadie más.</div>
+  <!-- PASSWORD -->
+  <div class="mb-3">
+    <label for="passwordUsuario" class="form-label">Contraseña</label>
+    <input formControlName="password" type="password" class="form-control" id="passwordUsuario">
+  </div>
+  <button [disabled]="userForm.invalid" type="submit" class="btn btn-primary">Enviar</button>
+</form>
